@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Rare
         { id: 13, name: "Pool Party Leona", champion: "Leona", rarity: "Rare", splash_art: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Leona_4.jpg", value: 975 },
         { id: 14, name: "Blood Moon Yasuo", champion: "Yasuo", rarity: "Rare", splash_art: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_3.jpg", value: 975 },
-        { id: 17, name: "High Noon Yasuo", champion: "Yasuo", rarity: "Rare", splash_art: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_2.jpg", value: 975 },
+        { id: 17, name: "High Noon Yasuo", champion: "Yasuo", rarity: "Rare", splash_art: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_1.jpg", value: 975 },
         // Common
         { id: 15, name: "Assassin Master Yi", champion: "Master Yi", rarity: "Common", splash_art: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MasterYi_1.jpg", value: 520 },
         { id: 16, name: "Mercenary Katarina", champion: "Katarina", rarity: "Common", splash_art: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Katarina_1.jpg", value: 520 }
@@ -254,6 +254,9 @@ document.addEventListener('DOMContentLoaded', () => {
             inventory.push({ ...skin, invId });
             saveStorageInventory(inventory);
             modal.classList.add('hidden');
+            winScreen.classList.add('hidden');
+            isSpinning = false;
+            btnOpenCase.disabled = false;
             showNotification(`Added ${skin.name} to Inventory!`);
         };
 
@@ -262,6 +265,9 @@ document.addEventListener('DOMContentLoaded', () => {
             saveStorageUser(user);
             updateStatsUI();
             modal.classList.add('hidden');
+            winScreen.classList.add('hidden');
+            isSpinning = false;
+            btnOpenCase.disabled = false;
             showNotification(`Sold ${skin.name} for ${sellVal} Coins!`);
         };
     };
