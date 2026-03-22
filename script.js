@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentCase = config;
         document.getElementById('opening-case-name').textContent = config.name;
         document.getElementById('opening-case-price').textContent = config.price;
+        winScreen.classList.add('hidden'); // Fix: Hide win screen when reopening
         modal.classList.remove('hidden');
         
         // Setup Opening Animation
@@ -109,12 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const spinnerContainer = document.getElementById('spinner-container');
         const openingChestImg = document.getElementById('opening-chest-img');
         const glowBurst = document.getElementById('glow-burst');
-        
+        const flashOverlay = document.getElementById('flash-overlay');
+
         openingContainer.classList.remove('hidden');
         spinnerContainer.classList.add('hidden');
         openingChestImg.src = config.image;
         openingChestImg.classList.remove('shake');
         glowBurst.classList.remove('active');
+        flashOverlay.classList.remove('active'); // Fix: Ensure flash is gone
     };
 
     document.getElementById('close-case-modal').onclick = () => {
