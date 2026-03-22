@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoL Hextech Cases - Skin Opening</title>
+    <!-- Use a modern, gaming style font -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Teko:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="hex-bg-container">
+        <div class="hex-grid-overlay"></div>
+        <div class="hex-glow-orbital"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <h1>HEXTECH<span>DROP</span></h1>
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn active" id="nav-cases">CASES</button>
+            <button class="nav-btn" id="nav-inventory">INVENTORY</button>
+        </div>
+        <div class="user-stats">
+            <button id="btn-daily" class="daily-btn">DAILY REWARD</button>
+            <div class="balance">
+                <img src="https://static.wikia.nocookie.net/leagueoflegends/images/0/0e/Blue_Essence.png/revision/latest" alt="Coins" class="coin-icon">
+                <span id="user-balance">0</span>
+            </div>
+            <div class="user-info" id="username-display">User</div>
+        </div>
+    </nav>
+
+    <!-- Cases Page -->
+    <main id="page-cases" class="page-container active-page">
+        <div class="hero">
+            <h2>OPEN HEXTECH CHESTS</h2>
+            <p>Unlock the rarest skins in League of Legends.</p>
+        </div>
+        <div class="cases-grid" id="cases-container">
+            <!-- Cases will be dynamically injected here -->
+        </div>
+    </main>
+
+    <!-- Case Opening Overlay (Modal) -->
+    <div id="case-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="close-modal" id="close-case-modal">&times;</button>
+            <h2 id="opening-case-name">Premium Case</h2>
+            
+            <div class="opening-animation-container" id="opening-animation-container">
+                <img id="opening-chest-img" src="" class="opening-chest">
+                <div class="glow-burst" id="glow-burst"></div>
+            </div>
+
+            <div class="spinner-container hidden" id="spinner-container">
+                <div class="spinner-pointer"></div>
+                <div class="spinner-track" id="spinner-track">
+                    <!-- Spinning items will be injected here -->
+                </div>
+            </div>
+
+            <div class="flash-overlay" id="flash-overlay"></div>
+
+            <div class="modal-actions">
+                <button id="btn-open-case" class="action-btn">OPEN - <span id="opening-case-price">1000</span> <img src="https://static.wikia.nocookie.net/leagueoflegends/images/0/0e/Blue_Essence.png" class="coin-icon-small"></button>
+            </div>
+            
+            <!-- Winning screen -->
+            <div id="win-screen" class="win-screen hidden">
+                <h3 class="win-title">YOU GOT</h3>
+                <div class="won-item" id="won-item">
+                    <img id="won-image" src="" alt="Skin">
+                    <div class="won-rarity" id="won-rarity">Legendary</div>
+                    <div class="won-name" id="won-name">K/DA Ahri</div>
+                </div>
+                <div class="win-actions">
+                    <button class="action-btn outline" id="btn-sell-won">SELL FOR <span id="sell-won-price"></span></button>
+                    <button class="action-btn" id="btn-keep-won">KEEP</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inventory Page -->
+    <main id="page-inventory" class="page-container hidden">
+        <div class="inventory-header">
+            <h2>YOUR INVENTORY</h2>
+            <div class="filters">
+                <select id="rarity-filter">
+                    <option value="All">All Rarities</option>
+                    <option value="Ultimate">Ultimate</option>
+                    <option value="Mythic">Mythic</option>
+                    <option value="Legendary">Legendary</option>
+                    <option value="Epic">Epic</option>
+                    <option value="Rare">Rare</option>
+                    <option value="Common">Common</option>
+                </select>
+                <div class="inventory-stats">
+                    Total Value: <span id="inventory-total-value">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="inventory-grid" id="inventory-container">
+            <!-- Inventory items injected here -->
+        </div>
+    </main>
+
+    <!-- Notifications System -->
+    <div id="notifications-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
