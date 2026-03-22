@@ -509,16 +509,37 @@ a, button {
 
 @keyframes chestShake {
     0% { transform: translate(0, 0) rotate(0deg); }
-    10% { transform: translate(-2px, -2px) rotate(-1deg); }
-    20% { transform: translate(2px, -1px) rotate(1deg); }
-    30% { transform: translate(-3px, 1px) rotate(0deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg); }
-    60% { transform: translate(-3px, 1px) rotate(0deg); }
-    70% { transform: translate(2px, 1px) rotate(-1deg); }
-    80% { transform: translate(-1px, -1px) rotate(1deg); }
-    90% { transform: translate(2px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
+    10% { transform: translate(-3px, -3px) rotate(-2deg); }
+    20% { transform: translate(3px, -2px) rotate(2deg); }
+    30% { transform: translate(-4px, 2px) rotate(0deg); }
+    40% { transform: translate(2px, -2px) rotate(2deg); }
+    50% { transform: translate(-2px, 3px) rotate(-2deg); }
+    60% { transform: translate(-4px, 2px) rotate(0deg); }
+    70% { transform: translate(3px, 2px) rotate(-2deg); }
+    80% { transform: translate(-2px, -2px) rotate(2deg); }
+    90% { transform: translate(3px, 3px) rotate(0deg); }
+    100% { transform: translate(2px, -3px) rotate(-2deg); }
+}
+
+.opening-chest.burst {
+    animation: chestBurst 0.3s ease-out forwards;
+}
+
+@keyframes chestBurst {
+    0% { transform: scale(1); opacity: 1; filter: brightness(1) blur(0); }
+    100% { transform: scale(1.8); opacity: 0; filter: brightness(3) blur(10px); }
+}
+
+/* Shards */
+.shard {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--hex-gold-bright);
+    z-index: 15;
+    pointer-events: none;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); /* Diamond shard */
+    box-shadow: 0 0 10px var(--hex-gold-bright);
 }
 
 .glow-burst {

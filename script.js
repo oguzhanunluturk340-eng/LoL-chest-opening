@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 7, name: "Project: Vayne", champion: "Vayne", rarity: "Legendary", splash_art: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Vayne_11.jpg", value: 1820 },
         { id: 8, name: "Dark Cosmic Jhin", champion: "Jhin", rarity: "Legendary", splash_art: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jhin_4.jpg", value: 1820 },
         { id: 9, name: "God-King Darius", champion: "Darius", rarity: "Legendary", splash_art: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Darius_14.jpg", value: 1820 },
-        { id: 18, name: "Nightbringer Yasuo", champion: "Yasuo", rarity: "Legendary", splash_art: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_10.jpg", value: 1820 },
+        { id: 18, name: "Nightbringer Yasuo", champion: "Yasuo", rarity: "Legendary", splash_art: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_9.jpg", value: 1820 },
         // Epic
         { id: 10, name: "Blood Moon Jhin", champion: "Jhin", rarity: "Epic", splash_art: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jhin_2.jpg", value: 1350 },
         { id: 11, name: "K/DA Akali", champion: "Akali", rarity: "Epic", splash_art: "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Akali_13.jpg", value: 1350 },
@@ -116,8 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
         spinnerContainer.classList.add('hidden');
         openingChestImg.src = config.image;
         openingChestImg.classList.remove('shake');
+        openingChestImg.classList.remove('burst'); // Fix: Reset animation
         glowBurst.classList.remove('active');
         flashOverlay.classList.remove('active'); // Fix: Ensure flash is gone
+
+        // Fix: Cleanup old shards
+        document.querySelectorAll('.shard').forEach(s => s.remove());
     };
 
     document.getElementById('close-case-modal').onclick = () => {
@@ -169,10 +173,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 2. Wait for the "build-up"
         setTimeout(() => {
-            // 3. Trigger Flash
+            // 3. SHATTER EFFECT
+            openingChest.classList.remove('shake');
+            openingChest.classList.add('burst');
+            createShards(openingContainer);
+
+            // 4. Trigger Flash
             flashOverlay.classList.add('active');
             
-            // 4. Mid-flash transition (0.3s into 0.8s flash)
+            // 5. Mid-flash transition (0.3s into 0.8s flash)
             setTimeout(() => {
                 openingContainer.classList.add('hidden');
                 spinnerContainer.classList.remove('hidden');
@@ -187,6 +196,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 800);
 
         }, 4000); // 4 seconds of build-up
+    };
+
+    const createShards = (container) => {
+        const shardCount = 20;
+        for (let i = 0; i < shardCount; i++) {
+            const shard = document.createElement('div');
+            shard.className = 'shard';
+            container.appendChild(shard);
+
+            const angle = Math.random() * Math.PI * 2;
+            const dist = 100 + Math.random() * 300;
+            const x = Math.cos(angle) * dist;
+            const y = Math.sin(angle) * dist;
+            const rot = Math.random() * 720;
+
+            shard.animate([
+                { transform: 'translate(0, 0) rotate(0deg)', opacity: 1 },
+                { transform: `translate(${x}px, ${y}px) rotate(${rot}deg)`, opacity: 0 }
+            ], {
+                duration: 1000 + Math.random() * 1000,
+                easing: 'cubic-bezier(0, .9, .5, 1)',
+                fill: 'forwards'
+            });
+        }
     };
 
     const startReelSpin = (winSkin) => {
